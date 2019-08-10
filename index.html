@@ -71,7 +71,30 @@
         ctx.closePath();
         ctx.fill();
 
+  for (var i = 0; i < data.length; i ++) {
 
+            ctx.save();
+            ctx.fillStyle = 'black';
+            ctx.textBaseline = "middle";
+
+
+            ctx.strokeStyle = colorArr[i];
+            console.log(colorArr[i]);
+
+            ctx.lineWidth = '10';
+            ctx.beginPath();
+
+            ctx.moveTo(20, (i+1)*30);
+            ctx.lineTo(40, (i+1)*30);
+            ctx.stroke();
+            ctx.fillText(data[i].name,60, (i+1)*30)
+
+            console.log((i+1)*50)
+
+            ctx.closePath();
+            ctx.restore();
+
+        }
 
        
 
