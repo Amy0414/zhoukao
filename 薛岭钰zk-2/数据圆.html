@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var data = [
+            { value: 335, name: '直接访问', color: "rgb(213, 58, 53)" },
+            { value: 310, name: '邮件营销', color: "rgb(51, 75, 92)" },
+            { value: 234, name: '联盟广告', color: "rgb(106, 176, 184)" },
+            { value: 135, name: '视频广告', color: "rgb(233, 143, 111)" },
+            { value: 1548, name: '搜索引擎', color: "rgb(145, 199, 174)" }
+        ]
+
+        var canvas = document.createElement("canvas");
+
+        canvas.width = 500;
+        canvas.height = 500;
+        canvas.style.border = "1px solid black";
+        document.body.appendChild(canvas);
+
+        var ctx = canvas.getContext("2d");
+        var deg = Math.PI / 180;
+
+
+
+
+        var values = [];
+
+        var colorArr = [];
+        for (var i = 0; i < data.length; i++) {
+            colorArr.push(data[i].color);
+            values.push(data[i].value);
+        }
+
+        var sum = values.reduce(function (prev, cur) {
+            return prev + cur;
+        })
+
+
+        var dagArr = data.map(function (item) {
+
+            return item.value / sum * 360;
+        });
+
+
+        var startDeg = -90;
+        for (var i = 0; i < dagArr.length; i++) {
+            var endDeg = dagArr[i];
+            ctx.beginPath();
+            ctx.fillStyle = colorArr[i];
+            ctx.moveTo(250, 250)
+            ctx.arc(250, 250, 150, startDeg * deg, (startDeg + endDeg) * deg);
+            ctx.closePath();
+
+            ctx.fill();
+            startDeg += endDeg;
+        }
+
+
+        ctx.beginPath();
+        ctx.fillStyle = "white";
+        ctx.moveTo(250, 250)
+        ctx.arc(250, 250, 100, 0, deg * 360);
+        ctx.closePath();
+        ctx.fill();
+
+
+
+       
+
+    </script>
+
+
+
+<script>
+
+        var canvas = document.createElement("canvas");
+
+        canvas.width = 500;
+        canvas.height = 500;
+        canvas.style.border = "1px solid black";
+        document.body.appendChild(canvas);
+
+        var ctx = canvas.getContext("2d");
+
+
+        var deg = Math.PI / 180;
+
+
+        ctx.beginPath();
+        ctx.fillStyle = "yellow";
+        ctx.arc(250, 250, 200, 0, deg * 360);
+        ctx.fill();
+
+
+        //嘴巴
+        ctx.beginPath();
+        ctx.fillStyle = 'white';
+        ctx.moveTo(250, 250);
+        ctx.arc(250, 250, 200, 0, -(deg * 12), true);
+        ctx.fill();
+
+
+        //眼睛
+        ctx.beginPath();
+        ctx.fillStyle = 'white';
+        ctx.arc(300, 170, 28, 0, deg * 360);
+        ctx.fill();
+
+
+        //眼珠子
+        ctx.beginPath();
+        ctx.fillStyle = 'black';
+        ctx.arc(310, 170, 15, 0, deg * 360);
+        ctx.fill();
+
+
+        //头发
+        ctx.beginPath();
+        ctx.strokeStyle = '#ccc';
+        ctx.lineWidth = '5';
+        for (var i = 210; i <= 290; i += 10) {
+            ctx.moveTo(i, 55);
+            ctx.lineTo(i, 85);
+        }
+        ctx.stroke();
+
+
+
+</script>
+</body>
+
+</html>
